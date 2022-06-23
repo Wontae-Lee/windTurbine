@@ -15,18 +15,30 @@ FoamFile
 
 surfaces
 (
-    "propeller-innerCylinder.obj"
-    "propeller-outerCylinder.obj"
-    "propeller.obj"
+   "wings.stl"
+   "column.stl"
+   "rotatingArea.stl"
 );
 
 // Identify a feature when angle between faces < includedAngle
 includedAngle   150;
 
+subsetFeatures
+{
+    // Keep nonManifold edges (edges with >2 connected faces)
+    nonManifoldEdges       yes;
+
+    // Keep open edges (edges with 1 connected face)
+    openEdges       yes;
+}
+
+
 trimFeatures
 {
+    
     // Remove features with fewer than the specified number of edges
     minElem         10;
 }
-
+    // Write features to obj format for postprocessing
+    writeObj                yes;
 // ************************************************************************* //

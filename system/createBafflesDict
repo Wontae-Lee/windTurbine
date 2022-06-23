@@ -21,7 +21,7 @@ baffles
     rotating
     {
         type        faceZone;
-        zoneName    innerCylinder;
+        zoneName    rotatingArea;
 
         patches
         {

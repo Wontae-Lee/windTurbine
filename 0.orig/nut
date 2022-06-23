@@ -8,15 +8,15 @@
 FoamFile
 {
     format      ascii;
-    class       volVectorField;
+    class       volScalarField;
     location    "0";
-    object      U;
+    object      nut;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 1 -1 0 0 0 0];
+dimensions      [0 2 -1 0 0 0 0];
 
-internalField   uniform (0 0 0);
+internalField   uniform 0;
 
 boundaryField
 {
@@ -25,26 +25,25 @@ boundaryField
 
     inlet
     {
-        type            fixedValue;
-        value           uniform (0 -5 0);
+        type            calculated;
+        value           uniform 0;
     }
 
     outlet
     {
-        type            inletOutlet;
-        inletValue      uniform (0 0 0);
-        value           uniform (0 0 0);
+        type            calculated;
+        value           uniform 0;
+    }
+    atmoshpere
+    {
+        type            calculated;
+        value           uniform 0;
     }
 
-    outerCylinder
+    wall
     {
-        type            noSlip;
-    }
-
-    "propeller.*"
-    {
-        type            movingWallVelocity;
-        value           uniform (0 0 0);
+        type            nutkWallFunction;
+        value           uniform 0;
     }
 }
 

@@ -33,6 +33,12 @@ boundaryField
         type            fixedValue;
         value           uniform 0;
     }
+    
+    atmoshpere
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
 
     wall
     {

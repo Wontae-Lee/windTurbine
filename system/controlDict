@@ -24,14 +24,9 @@ stopAt          endTime;
 
 endTime         0.1;
 
-deltaT          1e-5;
+deltaT          5e-6;
 writeControl    adjustableRunTime;
-writeInterval   0.001;
-
-////- For testing with moveDynamicMesh
-//deltaT          0.01;
-//writeControl    timeStep;
-//writeInterval   1;
+writeInterval   0.0005;
 
 purgeWrite      0;
 
@@ -50,12 +45,5 @@ runTimeModifiable true;
 adjustTimeStep  yes;
 
 maxCo           2;
-
-functions
-{
-    #includeFunc Q
-    #include "surfaces"
-    #include "forces"
-}
 
 // ************************************************************************* //

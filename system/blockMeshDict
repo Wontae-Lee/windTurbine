@@ -1,8 +1,8 @@
 /*--------------------------------*- C++ -*----------------------------------*\
-  =========                 |
+  =========                 |				
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  9
+    \\  /    A nd           | Version:  9                                   	
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -11,43 +11,70 @@ FoamFile
     class       dictionary;
     object      blockMeshDict;
 }
-
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 convertToMeters 1;
 
-vertices
+xmin -30;
+xmax  30;
+ymin  0;
+ymax  60;
+zmin -20;
+zmax  40;
+
+
+dx 2;
+dy 2;
+dz 2;
+
+lx #calc "$xmax - $xmin";
+ly #calc "$ymax - $ymin";
+lz #calc "$zmax - $zmin";
+
+xcells #calc "abs(($lx)/($dx))";
+ycells #calc "abs(($ly)/($dy))";
+zcells #calc "abs(($lz)/($dz))";
+
+vertices        
 (
-    (-0.3 -0.81 -0.3)
-    ( 0.3 -0.81 -0.3)
-    ( 0.3  0.21 -0.3)
-    (-0.3  0.21 -0.3)
-    (-0.3 -0.81  0.3)
-    ( 0.3 -0.81  0.3)
-    ( 0.3  0.21  0.3)
-    (-0.3  0.21  0.3)
+    ($xmin  $ymin  $zmin)
+    ($xmax  $ymin  $zmin)
+    ($xmax  $ymax  $zmin)
+    ($xmin  $ymax  $zmin)
+    ($xmin  $ymin  $zmax)
+    ($xmax  $ymin  $zmax)
+    ($xmax  $ymax  $zmax)
+    ($xmin  $ymax  $zmax)
 );
 
-blocks
+blocks          
 (
-    hex (0 1 2 3 4 5 6 7) (12 20 12) simpleGrading (1 1 1)
+    hex (0 1 2 3 4 5 6 7) ($xcells $ycells $zcells) simpleGrading (1 1 1)
 );
 
-edges
+edges           
 (
 );
+
 
 boundary
 (
-    walls
+    ground
     {
         type wall;
         faces
         (
+            (0 4 7 3)           
+        );
+    }
+    atmoshpere
+    {
+        type patch;
+        faces
+        (
             (2 6 5 1)
-            (0 3 2 1)
-            (0 4 7 3)
-            (4 5 6 7)
+            (1 5 4 0)
+            (3 7 6 2)
         );
     }
     inlet
@@ -55,7 +82,8 @@ boundary
         type patch;
         faces
         (
-            (3 7 6 2)
+            (0 3 2 1)
+           
         );
     }
     outlet
@@ -63,9 +91,12 @@ boundary
         type patch;
         faces
         (
-            (1 5 4 0)
+            (4 5 6 7)
+           
+           
         );
     }
 );
+
 
 // ************************************************************************* //

@@ -27,66 +27,25 @@ addLayers       false;
 // - to 'snap' the mesh boundary to the surface
 geometry
 {
-    innerCylinder
+    wings
     {
         type        triSurfaceMesh;
-        file        "propeller-innerCylinder.obj";
-        regions
-        {
-            innerCylinder
-            {
-                 name       innerCylinder;
-            }
-        }
+        file        "wings.stl";
+       
     }
-    middleCylinder
+    column
     {
         type        triSurfaceMesh;
-        file        "propeller-middleCylinder.obj";
-        regions
-        {
-            middleCylinder
-            {
-                 name       middleCylinder;
-            }
-        }
+        file        "column.stl";
+     
     }
-    outerCylinder
+    rotatingArea
     {
         type        triSurfaceMesh;
-        file        "propeller-outerCylinder.obj";
-        regions
-        {
-            outerCylinderWall
-            {
-                 name       outerCylinder;
-            }
-            outerCylinderInlet
-            {
-                 name       inlet;
-            }
-            outerCylinderOutlet
-            {
-                 name       outlet;
-            }
-        }
+        file        "rotatingArea.stl";      
     }
-    propeller
-    {
-        type        triSurfaceMesh;
-        file        "propeller.obj";
-        regions
-        {
-            propellerStem
-            {
-                 name       propellerStem;
-            }
-            propellerTip
-            {
-                 name       propellerTip;
-            }
-        }
-    }
+
+    
 };
 
 
@@ -138,16 +97,17 @@ castellatedMeshControls
     features
     (
         {
-            file        "propeller-innerCylinder.eMesh";
-            level       4;
+            file        "wings.eMesh";
+            level       2;
+        }
+    
+        {
+            file        "column.eMesh";
+            level       2;
         }
         {
-            file        "propeller-outerCylinder.eMesh";
-            level       0;
-        }
-        {
-            file        "propeller.eMesh";
-            level       4;
+            file        "rotatingArea.eMesh";
+            level       2;
         }
     );
 
@@ -164,46 +124,22 @@ castellatedMeshControls
 
     refinementSurfaces
     {
-        innerCylinder
+        rotatingArea
         {
-            level       (4 4);
-            cellZone    innerCylinder;
-            faceZone    innerCylinder;
+            type        boundary;           
+            level       (2 2);
+            cellZone    rotatingArea;
+            faceZone    rotatingArea;
             mode        inside;
         }
-        outerCylinder
+
+        wings
         {
-            level       (0 0);
-            regions
-            {
-                inlet
-                {
-                    level       (0 0);
-                    patchInfo
-                    {
-                        type        patch;
-                    }
-                }
-                outlet
-                {
-                    level       (0 0);
-                    patchInfo
-                    {
-                        type        patch;
-                    }
-                }
-            }
+            level       (2 2);
         }
-        propeller
+        column
         {
-            level       (4 4);
-            regions
-            {
-                propellerTip
-                {
-                    level (4 5);
-                }
-            }
+            level       (2 2);
         }
     }
 
@@ -226,16 +162,7 @@ castellatedMeshControls
 
     refinementRegions
     {
-        innerCylinder
-        {
-            mode    inside;
-            level   4;
-        }
-        middleCylinder
-        {
-            mode    inside;
-            level   3;
-        }
+      
     }
 
 
@@ -247,7 +174,7 @@ castellatedMeshControls
     // section reachable from the locationInMesh is kept.
     // NOTE: This point should never be on a face, always inside a cell, even
     // after refinement.
-    locationInMesh (0.01 -0.5 0.01);
+    locationInMesh (0 0 30);
 
 
     // Whether any faceZones (as specified in the refinementSurfaces)

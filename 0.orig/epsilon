@@ -10,13 +10,13 @@ FoamFile
     format      ascii;
     class       volScalarField;
     location    "0";
-    object      nut;
+    object      epsilon;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 2 -1 0 0 0 0];
+dimensions      [0 2 -3 0 0 0 0];
 
-internalField   uniform 0;
+internalField   uniform 0.0495;
 
 boundaryField
 {
@@ -25,20 +25,26 @@ boundaryField
 
     inlet
     {
-        type            calculated;
-        value           uniform 0;
+        type            fixedValue;
+        value           $internalField;
     }
 
     outlet
     {
-        type            calculated;
-        value           uniform 0;
+        type            inletOutlet;
+        inletValue      $internalField;
+        value           $internalField;
+    }
+    atmoshpere
+    {
+        type            fixedValue;
+        value           $internalField;
     }
 
     wall
     {
-        type            nutkWallFunction;
-        value           uniform 0;
+        type            epsilonWallFunction;
+        value           $internalField;
     }
 }
 

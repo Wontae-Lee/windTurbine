@@ -36,6 +36,12 @@ boundaryField
         value           $internalField;
     }
 
+    atmoshpere
+    {
+        type            inletOutlet;
+        inletValue      $internalField;
+        value           $internalField;
+    }
     wall
     {
         type            kqRWallFunction;
