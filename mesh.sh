@@ -1,7 +1,7 @@
 rm -r 0
 cp -r 0.orig 0
 
-blockMesh
+blockMesh 
 surfaceFeatures
 decomposePar
 # mpirun -np 8 snappyHexMesh -parallel -overwrite | tee log.shm

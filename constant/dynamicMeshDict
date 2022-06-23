@@ -26,6 +26,6 @@ solidBodyMotionFunction  rotatingMotion;
 
 origin      (0 37.9 0);
 axis        (0 0 1);
-omega       158; // rad/s
+omega       1.5; // rad/s
 
 // ************************************************************************* //

@@ -1,4 +1,4 @@
-rm -r 1e-05
+rm -r 0.0001
 
 decomposePar -force
 mpirun -np 8  pimpleFoam > log.pimpleFoam -parallel

@@ -24,9 +24,9 @@ stopAt          endTime;
 
 endTime         0.1;
 
-deltaT          1e-6;
+deltaT          1e-4;
 writeControl    adjustableRunTime;
-writeInterval   1e-5;
+writeInterval   1e-3;
 
 purgeWrite      0;
 
