@@ -14,5 +14,7 @@
 
 
 # 3. Animation
+![windTurbine](https://user-images.githubusercontent.com/72776658/175760768-f12952d2-ec46-4990-ab81-871c3c88736e.jpg)
 
+* I will update the animation soon if I buy a new computer.
 # 4. Furthermore
