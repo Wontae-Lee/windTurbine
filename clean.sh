@@ -1,3 +1,3 @@
+rm -r 0
 foamCleanTutorials
 clear
-rm -r 0
